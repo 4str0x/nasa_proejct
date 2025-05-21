@@ -1,14 +1,9 @@
 import asyncio
-
-from package import NasaConnection
+from factories.rover_service_factory import create_curiosity_service
 
 async def main():
-    Client = NasaConnection.Client()
+    service = create_curiosity_service(sol="1123", camera="fhaz")
+    result = await service.get_photos()
+    print(result)
 
-    dados = await Client.Curiosity(cam="FHAZ", sol="1250")
-
-    print(dados)
-
-
-if __name__ == "__main__":
-    asyncio.run(main())
+asyncio.run(main())
